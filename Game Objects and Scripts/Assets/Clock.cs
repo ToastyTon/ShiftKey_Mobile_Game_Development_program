@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Clock : MonoBehaviour {
     public Transform hoursTransform;
@@ -8,9 +9,14 @@ public class Clock : MonoBehaviour {
     public Transform secondsTransform;
     // Use this for initialization
 
+    const float degreesPerHour = 30f, degreesPerMinute = 6f, degreesPersecond = 6f;
     void Awake()
     {
-        Debug.Log(Time.time); 
+        //Debug.Log(DateTime.Now);
+        DateTime time = DateTime.Now;
+        hoursTransform.localRotation=Quaternion.Euler(0f, DateTime.Now.Hour* 30f, 0f);
+        minutesTransform.localRotation = Quaternion.Euler(0f, DateTime.Now.Minute * degreesPerMinute,0f);
+        secondsTransform.localRotation = Quaternion.Euler(0f, DateTime.Now.Second * degreesPersecond, 0f);
     }
     void Start () {
 		
