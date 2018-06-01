@@ -26,6 +26,7 @@ public class Graph : MonoBehaviour {
             point.localPosition = position;
             //point.localScale = Vector3.one / 5f;
             point.localScale = scale;
+            point.SetParent(transform,false);
         }
        
        // point.localPosition = Vector3.right * 2f;
