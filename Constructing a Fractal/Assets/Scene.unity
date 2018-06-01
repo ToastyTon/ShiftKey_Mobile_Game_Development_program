@@ -222,7 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDepth: 4
-  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  childScale: 0.618
+  mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   material: {fileID: 2100000, guid: 1c5fef6680123b84193c486db3563c66, type: 2}
 --- !u!4 &1260766427
 Transform:
