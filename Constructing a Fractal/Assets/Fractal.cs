@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Fractal : MonoBehaviour {
-
+    public float spawnProbability;
+    public Mesh[] meshes;
     public int maxDepth;
     public float childScale;
 
@@ -19,7 +20,7 @@ public class Fractal : MonoBehaviour {
         }
 
 
-        gameObject.AddComponent<MeshFilter>().mesh = mesh;
+        gameObject.AddComponent<MeshFilter>().mesh = meshes[Random.Range(0, meshes.Length)];
         gameObject.AddComponent<MeshRenderer>().material = materials[depth,Random.Range(0,2)];
         //GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.white, Color.yellow, (float)depth / maxDepth);
 
@@ -73,9 +74,13 @@ public class Fractal : MonoBehaviour {
     {
         for (int i = 0; i < childDirections.Length; i++)
         {
-            yield return new WaitForSeconds(Random.Range(0.1f,0.5f));
-            new GameObject("Fractal Child").
-                AddComponent<Fractal>().Initialiaze(this, i);
+            if (Random.value<spawnProbability)
+            {
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+                new GameObject("Fractal Child").
+                    AddComponent<Fractal>().Initialiaze(this, i);
+            }
+           
         }
         /*
         yield return new WaitForSeconds(0.5f);
@@ -92,13 +97,14 @@ public class Fractal : MonoBehaviour {
     }
     private void Initialiaze(Fractal parent,int childIndex)
     {
-        mesh = parent.mesh;
+        meshes = parent.meshes;
         materials = parent.materials;
         maxDepth = parent.maxDepth;
         depth = parent.depth + 1;
         childScale = parent.childScale;
         transform.parent = parent.transform;
         transform.localScale = Vector3.one * childScale;
+        spawnProbability = parent.spawnProbability;
         //transform.localPosition = Vector3.up * (0.5f + 0.5f * childScale);
         transform.localPosition = childDirections[childIndex] * (0.5f + 0.5f * childScale);
         transform.localRotation = childOrientations[childIndex];
