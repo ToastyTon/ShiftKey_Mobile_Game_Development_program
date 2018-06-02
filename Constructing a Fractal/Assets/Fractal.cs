@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Fractal : MonoBehaviour {
+    public float maxTwist;
+
     public float maxRotationSpeed;
     
     public float spawnProbability;
@@ -18,6 +20,7 @@ public class Fractal : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rotationSpeed = Random.Range(-maxRotationSpeed, maxRotationSpeed);
+        transform.Rotate(Random.Range(-maxTwist, maxTwist), 0f, 0f);
         if (materials==null)
         {
             InitializeMaterials();
@@ -109,6 +112,7 @@ public class Fractal : MonoBehaviour {
         transform.parent = parent.transform;
         transform.localScale = Vector3.one * childScale;
 
+        maxTwist = parent.maxTwist;
         maxRotationSpeed = parent.maxRotationSpeed;
         spawnProbability = parent.spawnProbability;
         //transform.localPosition = Vector3.up * (0.5f + 0.5f * childScale);

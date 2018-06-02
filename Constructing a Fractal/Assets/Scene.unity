@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3d4122bae1fcc4485219cb1f77427d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxTwist: 2.37
   maxRotationSpeed: 60
   spawnProbability: 0.81
   meshes:
